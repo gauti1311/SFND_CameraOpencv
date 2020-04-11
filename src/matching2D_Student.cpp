@@ -21,7 +21,7 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
          matcher = cv::FlannBasedMatcher::create();
     }
 
-    // perform matching task
+    // perform matching task  
     if (selectorType.compare("SEL_NN") == 0)
     { // nearest neighbor (best match)
 
@@ -30,7 +30,7 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
     else if (selectorType.compare("SEL_KNN") == 0)
     { // k nearest neighbors (k=2)
         int k =2;
-        std::vector<cv::DMatch> knnmatches;
+        std::vector<std::vector<cv::DMatch> >knnmatches;
         const float ratio = 0.8f;
         matcher->knnMatch(descSource, descRef, knnmatches,k);  
 
@@ -92,9 +92,6 @@ void descKeypoints(vector<cv::KeyPoint> &keypoints, cv::Mat &img, cv::Mat &descr
         extractor = cv::xfeatures2d::SIFT::create(0,octaves, 0.04,edgethresh,sigma);
     }
 
-   
-    
-
     // perform feature description
     double t = (double)cv::getTickCount();
     extractor->compute(img, keypoints, descriptors);
@@ -116,7 +113,7 @@ void detKeypointsShiTomasi(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool b
 
     // Apply corner detection
     double t = (double)cv::getTickCount();
-    vector<cv::Point2f> corners;
+    std::vector<cv::Point2f> corners;
     cv::goodFeaturesToTrack(img, corners, maxCorners, qualityLevel, minDistance, cv::Mat(), blockSize, false, k);
 
     // add corners to result vector
@@ -188,21 +185,10 @@ void detKeypointsFast(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
     bool nms = false;
     // Apply corner detection
     double t = (double)cv::getTickCount();
-    vector<cv::Point2f> corners;
+    std::vector<cv::Point2f> corners;
     
     cv::FAST(img,keypoints,thresh,nms);
-    //Fast.create(thresh, true,cv::FastFeatureDetector::TYPE_9_16);
-    //Fast.detect(img, corners);
-
-
-    // add corners to result vector
-    for (auto it = corners.begin(); it != corners.end(); ++it)
-    {
-        cv::KeyPoint newKeyPoint;
-        newKeyPoint.pt = cv::Point2f((*it).x, (*it).y);
-        newKeyPoint.size = blockSize;
-        keypoints.push_back(newKeyPoint);
-    }
+    
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << "FAST detection with n=" << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
 
@@ -227,25 +213,13 @@ void detKeypointsBrisk(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
 
     // Apply corner detection
     double t = (double)cv::getTickCount();
-    vector<cv::Point2f> corners;
+    std::vector<cv::Point2f> corners;
     cv::BRISK Brisk;
-
     Brisk.create(thresh,octave,1.0f);
+    Brisk.detect(img,keypoints);
 
-    Brisk.detect(img,corners);
-
-    // add corners to result vector
-    for (auto it = corners.begin(); it != corners.end(); ++it)
-    {
-
-        cv::KeyPoint newKeyPoint;
-        newKeyPoint.pt = cv::Point2f((*it).x, (*it).y);
-        newKeyPoint.size = blockSize;
-        keypoints.push_back(newKeyPoint);
-    }
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << "Brisk detection with n=" << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
-
     // visualize results
     if (bVis)
     {
@@ -258,8 +232,6 @@ void detKeypointsBrisk(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
     }
 }
 
- 
-
 void detKeypointsOrb(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
 {
     // compute detector parameters based on image size
@@ -268,29 +240,20 @@ void detKeypointsOrb(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
 
     // Apply corner detection
     double t = (double)cv::getTickCount();
-    vector<cv::Point2f> corners;
-
-    int nfeatures = 500;
-    float scalefactor = 1.2f;
-    int nlevels = 8;
-    int threshold = 31; 
-    int firstlevel = 0;
-    int patchsize =31;      
+       
     //int scoreType= cv::ORB::HARRIS_SCORE;
 
-    cv::ORB detector;
-    detector.create(nfeatures , scalefactor, nlevels,threshold,firstlevel,cv::ORB::HARRIS_SCORE,patchsize);
-    detector.detect(img,corners);
+    cv::Ptr<cv::FeatureDetector>Orb = cv::ORB::create();
+    Orb->detect(img,keypoints);
 
-    // add corners to result vector
+    /* add corners to result vector
     for (auto it = corners.begin(); it != corners.end(); ++it)
     {
-
         cv::KeyPoint newKeyPoint;
         newKeyPoint.pt = cv::Point2f((*it).x, (*it).y);
         newKeyPoint.size = blockSize;
         keypoints.push_back(newKeyPoint);
-    }
+    }*/
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << "ORB detection with n=" << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
 
@@ -316,17 +279,16 @@ void detKeypointsAkaze(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
     double t = (double)cv::getTickCount();
     vector<cv::Point2f> corners;
 
-    cv::AKAZE detector;
-    detector.create(cv::AKAZE::DESCRIPTOR_MLDB, descriptor_size = 0,descriptor_channels = 3,threshold = 0.001f, nOctaves = 4,nOctaveLayers = 4); 	
-    detector.detect(img,corners);
-    // add corners to result vector
+    cv::Ptr<cv::FeatureDetector>Akaze = cv::AKAZE::create() ;
+    Akaze->detect(img,keypoints);
+    /* add corners to result vector
     for (auto it = corners.begin(); it != corners.end(); ++it)
     {
         cv::KeyPoint newKeyPoint;
         newKeyPoint.pt = cv::Point2f((*it).x, (*it).y);
         newKeyPoint.size = blockSize;
         keypoints.push_back(newKeyPoint);
-    }
+    }*/
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << "Akaze detection with n=" << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
 
@@ -352,20 +314,19 @@ void detKeypointsSift(vector<cv::KeyPoint> &keypoints, cv::Mat &img, bool bVis)
     double t = (double)cv::getTickCount();
     vector<cv::Point2f> corners;
 
-    cv::xfeatures2d::SiftFeatureDetector detector;
+    cv::xfeatures2d::SiftFeatureDetector SiftD;
+    SiftD.create(0,3,0.04f,30,1.6);
+    SiftD.detect(img,keypoints);
 
-    detector.create(0,3,0.04f,30,1.6);
-    detector.detect(img,corners);
-
-    // add corners to result vector
+    
+    /* add corners to result vector
     for (auto it = corners.begin(); it != corners.end(); ++it)
     {
-
         cv::KeyPoint newKeyPoint;
         newKeyPoint.pt = cv::Point2f((*it).x, (*it).y);
         newKeyPoint.size = blockSize;
         keypoints.push_back(newKeyPoint);
-    }
+    }*/
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << "Sift detection with n=" << keypoints.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
 
