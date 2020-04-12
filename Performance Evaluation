@@ -1,0 +1,119 @@
+Performance Evaluation 
+Shi-Tomasi detection with SIFT descriptor
+1 :  n=1370 keypoints in 40.3678 ms , extraction in 52.9471 ms
+2 :  n=1301 keypoints in 19.4665 ms , extraction in 23.9041 ms
+3 :  n=1361 keypoints in 18.8039 ms, extraction in 24.5129 ms
+4 :  n=1358 keypoints in 16.963 ms, extraction in 26.6778 ms
+5 :  n=1333 keypoints in 17.2599 ms, extraction in 24.9428 ms
+6 :  n=1284 keypoints in 18.5036 ms, extraction in 23.588 ms
+7 :  n=1322 keypoints in 17.2028 ms, extraction in 24.0754 ms
+8 :  n=1366 keypoints in 17.6329 ms, extraction in 23.4399 ms
+9 :  n=1389 keypoints in 18.2661 ms,extraction in 23.0987 ms
+10: n=1339 keypoints in 16.573 ms, extraction in 23.6478 ms
+
+FAST detection with SIFT descriptor
+1 : n=897 keypoints in 0.413122 ms, extraction in 32.9519 ms
+2 : n=893 keypoints in 0.312113 ms, extraction in 27.8758 ms
+3 : n=846 keypoints in 0.316498 ms, extraction in 25.6605 ms
+4 : n=897 keypoints in 0.345493 ms, extraction in 26.7255 ms
+5 : n=852 keypoints in 0.366761 ms, extraction in 24.5215 ms
+6 : n=836 keypoints in 0.26229 ms, extraction in 26.696 ms
+7 : n=885 keypoints in 0.3655 ms, extraction in 26.554 ms
+8 : n=869 keypoints in 0.275382 ms, extraction in 26.5348 ms
+9 : n=898 keypoints in 0.405789 ms, extraction in 27.1533 ms
+10 : n=908 keypoints in 0.362911 ms, extraction in 27.0644 ms
+
+ORB detection with SIFT descriptor
+1 : n=500 keypoints in 18.1845 ms, extraction in 54.5295 ms
+2 :  n=500 keypoints in 8.0658 ms ,extraction in 44.5165 ms
+3 : n=500 keypoints in 7.4451 ms, extraction in 51.9553 ms
+4 : n=500 keypoints in 8.14839 ms,  extraction in 49.9813 ms
+5 : n=500 keypoints in 8.17683 ms, extraction in 46.5463 ms
+6 : n=500 keypoints in 7.93783 ms, extraction in 49.4911 ms
+7 : n=500 keypoints in 9.69752 ms, extraction in 52.7957 ms
+8 : n=500 keypoints in 8.38868 ms, extraction in 55.1402 ms
+9 : n=500 keypoints in 8.37921 ms, extraction in 54.8323 ms
+10 : n=500 keypoints in 8.54376 ms, extraction in 51.611 ms
+
+Akaze detection with SIFT descriptor
+1 : n=1351 keypoints in 101.372 ms,extraction in 27.7324 ms
+2 : n=1327 keypoints in 93.7997 ms, extraction in 33.7057 ms
+3 : n=1311 keypoints in 92.1132 ms, extraction in 32.3935 ms
+4 : n=1351 keypoints in 85.2123 ms, extraction in 26.2816 ms
+5 : n=1360 keypoints in 84.6002 ms, extraction in 25.022 ms
+6 : n=1347 keypoints in 92.3907 ms. extraction in 32.3218 ms
+7 : n=1363 keypoints in 90.5329 ms, extraction in 24.9312 ms
+8 : n=1331 keypoints in 91.2126 ms, extraction in 32.21 ms
+9 : n=1357 keypoints in 97.6597 ms, extraction in 33.2831 ms
+10 : n=1331 keypoints in 88.227 ms, extraction in 32.5032 ms
+
+
+Shi-Tomasi detection with BRISK descriptor
+1 : n=1370 keypoints in 21.4996 ms, extraction in 5.23644 ms
+2 : n=1301 keypoints in 18.7685 ms, extraction in 4.88638 ms
+3 : n=1361 keypoints in 16.8684 ms, extraction in 2.57561 ms
+4 : n=1358 keypoints in 22.014 ms,  extraction in 2.77988 ms
+5 : n=1333 keypoints in 17.091 ms,  extraction in 2.32606 ms
+6 : n=1284 keypoints in 17.2513 ms, extraction in 2.30066 ms
+7 : n=1322 keypoints in 17.4681 ms, extraction in 2.3435 ms
+8 : n=1366 keypoints in 17.9426 ms, extraction in 2.43951 ms
+9 : n=1389 keypoints in 17.6432 ms, extraction in 2.62409 ms
+10: n=1339 keypoints in 16.4609 ms,extraction in 2.40502 ms
+
+
+FAST detection , BRISK descriptor
+1 : n=897 keypoints in 0.468474 ms, extraction in 3.05564 ms
+2 : n=893 keypoints in 0.350333 ms, extraction in 2.70621 ms
+3 : n=846 keypoints in 0.347604 ms, extraction in 1.8049 ms
+
+ORB detection with BRISK descriptor
+1 : n=500 keypoints in 16.2603 ms, extraction in 2.19941 ms
+2 : n=500 keypoints in 9.353 ms, extraction in 1.5003 ms
+3 : n=500 keypoints in 8.61795 ms, extraction in 1.41787 ms
+
+Akaze detection with BRISK descriptor
+1 : n=1351 keypoints in 98.3183 ms , extraction in 2.15499 ms
+2 : n=1327 keypoints in 95.4788 ms, extraction in 2.02344 ms
+3 : n=1311 keypoints in 95.7903 ms, extraction in 2.24859 ms
+4 : n=1351 keypoints in 90.2642 ms, extraction in 2.73262 ms
+
+Shi-Tomasi detection with FREAK descriptor
+1 : n=1370 keypoints in 20.7165 ms, extraction in 45.738 ms
+2 : n=1301 keypoints in 17.3361 ms, extraction in 41.4863 ms
+3 : n=1361 keypoints in 13.9318 ms, extraction in 42.1287 ms
+4 : n=1358 keypoints in 12.395 ms, extraction in 42.1562 ms
+
+FAST detection with FREAK descriptor 
+1 : n=897 keypoints in 0.421814 ms , extraction in 47.7066 ms
+2 : n=893 keypoints in 0.327833 ms , extraction in 46.6234 ms
+3 : n=846 keypoints in 0.3475 ms ,extraction in 42.4932 ms
+
+ORB detection with FREAK descriptor
+1 :n=500 keypoints in 9.70042 ms , extraction in 45.2661 ms
+2 : n=500 keypoints in 8.44987 ms, extraction in 43.8924 ms
+3 : n=500 keypoints in 9.14472 ms , extraction in 43.1182 ms
+
+Akaze detection with FREAK descriptor
+1 : n=1351 keypoints in 92.3081 ms ,extraction in 44.6948 ms
+2 : n=1327 keypoints in 90.6205 ms, extraction in 40.6324 ms
+3 : n=1311 keypoints in 95.0172 ms, extraction in 43.8137 ms
+
+Shi-Tomasi detection with BRISK descriptor 
+1 : n=1370 keypoints in 21.5111 ms , extraction in 1.80595 ms
+2 : n=1301 keypoints in 18.3379 ms, extraction in 2.62782 ms
+3 : n=1361 keypoints in 17.9747 ms,extraction in 2.43276 ms
+
+FAST detection with BRISK descriptor
+1 :n=897 keypoints in 0.32164 ms ,extraction in 2.56943 ms
+2 : n=893 keypoints in 0.369088 ms, extraction in 2.62428 ms
+3 : n=846 keypoints in 0.353847 ms, extraction in 1.73336 ms
+
+ORB detection with BRISK descriptor
+1 : n=500 keypoints in 11.2491 ms ,extraction in 2.23056 ms
+2 : n=500 keypoints in 8.2730 ms ,extraction in 1.48095 ms
+3 : n=500 keypoints in 8.93822 ms, extraction in 1.41603 ms
+
+Akaze detection with BRISK descriptor 
+1 :n=1351 keypoints in 92.6488 ms, extraction in 2.05846 ms
+2 : n=1327 keypoints in 85.6245 ms, extraction in 2.04423 ms
+3 : n=1311 keypoints in 89.7945 ms, extraction in 1.99253 ms
